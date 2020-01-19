@@ -1,0 +1,59 @@
+<html>
+    <head>
+        <title>Bakul Washing Machine</title>
+        <link href="{{url_for('static', filename='css/style.css')}}" rel="stylesheet">
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        
+        
+        <script>
+            $(document).ready(function() {
+            $("#on , #off").click(function(){
+              $.ajax({
+                data : {
+                   word :this.id,
+                //    postag: $('#postag option:selected').text(),   
+                       },
+                   type : 'POST',
+                   url : '/result/control'
+                  })
+            //   .done(function(data) {
+            //     if(data.output == "Correct"){
+            //     $('#output').text(data.output).css("color","green").show();
+            // }
+            //           if(data.output == "Incorrect"){
+            //                             $('#output').text(data.output).css("color","red").show();
+    
+            //               }
+    
+            // });
+            event.preventDefault();
+            });
+          });
+        </script>
+        
+        
+    </head>
+
+    <body>
+        <h1>BAKUL WASHING MACHINE - 1 STATUS</h1>
+        <!-- <p>Status : </p> -->
+        <!-- <p id="result">Status : {{ result }} </p> -->
+        <p> Readings</p>
+        <table border = 1>
+                {% for key, value in result.items() %}
+                   <tr>
+                      <th> {{ key }} </th>
+                      <td> {{ value }} </td>
+                   </tr>
+                {% endfor %}
+        </table>
+
+        <button id="on">Turn machine On !!</button>
+        <button id="off">Turn machine Off !!</button>
+        <p>Status:</p>
+        <p>{{ stat }}</p>
+        <!-- <p>Energy Consumption : </p> -->
+        <!-- <p>Water Flow rate :  </p> -->
+    </body>
+</html>
